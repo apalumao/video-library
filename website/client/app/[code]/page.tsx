@@ -1,6 +1,14 @@
-import { getVideoByCode } from '@/lib/videos';
+import { getVideos, getVideoByCode } from '@/lib/videos';
 import HlsPlayer from '@/components/HlsPlayer';
 import Link from 'next/link';
+
+// Required for static export
+export async function generateStaticParams() {
+  const videos = getVideos();
+  return videos.map((video) => ({
+    code: video.code,
+  }));
+}
 
 interface PageProps {
   params: Promise<{ code: string }>;
