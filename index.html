@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Library</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -18,11 +20,11 @@
 
         <div class="video-player-section" id="playerSection" style="display: none;">
             <div class="player-wrapper">
-                <iframe id="videoPlayer" allowfullscreen></iframe>
+                <video id="videoPlayer" controls></video>
                 <div class="player-info">
                     <h2 id="currentVideoTitle">Loading...</h2>
                     <p id="currentVideoQuality"></p>
-                    <a id="currentVideoLink" href="#" target="_blank">Open in New Tab</a>
+                    <a id="currentVideoLink" href="#" target="_blank">Open Original Page</a>
                 </div>
             </div>
             <button class="close-player" onclick="closePlayer()">✕ Close Player</button>
@@ -32,91 +34,6 @@
             <!-- Videos will be loaded here -->
         </div>
     </div>
-
-    <script>
-        let allVideos = [];
-
-        // Load videos from JSON
-        async function loadVideos() {
-            try {
-                const response = await fetch('videos.json');
-                allVideos = await response.json();
-                displayVideos(allVideos);
-                document.getElementById('totalCount').textContent = allVideos.length;
-            } catch (error) {
-                console.error('Error loading videos:', error);
-                document.getElementById('videoGrid').innerHTML = '<p>Error loading videos</p>';
-            }
-        }
-
-        // Display videos in grid
-        function displayVideos(videos) {
-            const grid = document.getElementById('videoGrid');
-            
-            if (videos.length === 0) {
-                grid.innerHTML = '<p class="no-results">No videos found</p>';
-                return;
-            }
-
-            grid.innerHTML = videos.map(video => `
-                <div class="video-card" onclick="playVideo('${video.videoUrl}', '${video.code}', '${video.quality}')">
-                    <div class="video-thumbnail">
-                        <div class="play-icon">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <h3>${video.code}</h3>
-                        <span class="quality-badge">${video.quality || 'HD'}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Play video
-        function playVideo(videoUrl, code, quality) {
-            const iframe = document.getElementById('videoPlayer');
-            const playerSection = document.getElementById('playerSection');
-            
-            // Update player info
-            document.getElementById('currentVideoTitle').textContent = code;
-            document.getElementById('currentVideoQuality').textContent = `Quality: ${quality || 'HD'}`;
-            document.getElementById('currentVideoLink').href = videoUrl;
-            
-            // Load video page in iframe
-            iframe.src = videoUrl;
-            
-            // Show player section
-            playerSection.style.display = 'block';
-            playerSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Close player
-        function closePlayer() {
-            const video = document.getElementById('videoPlayer');
-            const playerSection = document.getElementById('playerSection');
-            
-            video.pause();
-            if (hls) {
-                hls.destroy();
-                hls = null;
-            }
-            playerSection.style.display = 'none';
-        }
-
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filtered = allVideos.filter(video => 
-                video.code.toLowerCase().includes(searchTerm)
-            );
-            displayVideos(filtered);
-        });
-
-        // Load videos on page load
-        loadVideos();
-    </script>
 </body>
 </html>
-iframe = document.getElementById('videoPlayer');
-            const playerSection = document.getElementById('playerSection');
-            
-            iframe.src = '';
+</html>
