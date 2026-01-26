@@ -4,9 +4,9 @@ __pycache__/
 *.db
 *.csv
 *.txt
-fetch_*.py
-csv_to_sqlite.py
-export_to_json.py
+# fetch_*.py
+# csv_to_sqlite.py
+# export_to_json.py
 
 # Node modules
 node_modules/
