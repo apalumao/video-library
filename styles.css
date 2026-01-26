@@ -69,8 +69,10 @@ header h1 {
 #videoPlayer {
     width: 100%;
     max-width: 800px;
+    height: 450px;
     border-radius: 10px;
     background: #000;
+    border: none;
 }
 
 .player-info {
