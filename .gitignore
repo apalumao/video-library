@@ -1,0 +1,23 @@
+# Python scripts and data
+*.pyc
+__pycache__/
+*.db
+*.csv
+*.txt
+fetch_*.py
+csv_to_sqlite.py
+export_to_json.py
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Website folder (separate repo)
+website/
