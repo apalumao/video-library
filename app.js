@@ -2,7 +2,7 @@ let allVideos = [];
 let hls = null;
 
 // Proxy server URL - change this to your deployed proxy URL
-const PROXY_URL = 'http://localhost:3000';
+const PROXY_URL = 'https://video-proxy-server-lddl.onrender.com';
 
 // Load videos from JSON
 async function loadVideos() {
